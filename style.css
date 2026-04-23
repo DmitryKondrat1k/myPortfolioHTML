@@ -632,8 +632,12 @@ main {
     }
 
 }
-
-
+.header-hidden {
+    transform: translateY(-100%); /* Уводит меню вверх за экран */
+    opacity: 0;
+    pointer-events: none; /* Чтобы нельзя было случайно нажать */
+    transition: all 0.4s ease; /* Плавное исчезновение */
+}
 /* --- Секция Обо мне --- */
 .about-section {
     padding: 50px 0;

@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Логика кликов для видео (оставляем как была, она рабочая)
     const items = document.querySelectorAll('.work-item');
     const overlay = document.getElementById('videoOverlay');
+    const header = document.querySelector('header'); // Находим хедер
 
     items.forEach(item => {
         item.addEventListener('click', function(e) {
@@ -65,6 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
             this.classList.add('active');
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
+            header.classList.add('header-hidden');
 
             container.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
         });
@@ -76,6 +78,10 @@ document.addEventListener("DOMContentLoaded", () => {
             activeItem.classList.remove('active');
             overlay.classList.remove('active');
             document.body.style.overflow = '';
+
+            // 3. ВОЗВРАЩАЕМ ВЕРХНЮЮ ПЛАШКУ
+            header.classList.remove('header-hidden');
+
             const videoId = activeItem.getAttribute('data-video');
             activeItem.querySelector('.video-container').innerHTML = `<div class="video-placeholder" style="background-image: url('https://img.youtube.com/vi/${videoId}/maxresdefault.jpg');"></div>`;
         }
