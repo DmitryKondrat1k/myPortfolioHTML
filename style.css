@@ -881,7 +881,7 @@ main {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     color: var(--text-sand);
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     font-weight: 700;
     padding-bottom: 30px;
 
@@ -898,6 +898,8 @@ main {
     .footer-bottom {
         text-align: center; /* На телефоне копирайт по центру */
         padding-bottom: 20px;
+            font-size: 0.7rem;
+
     }
     .footer-logo-img {
     padding-top: 0;
