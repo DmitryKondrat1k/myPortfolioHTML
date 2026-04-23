@@ -1,0 +1,917 @@
+/* Базовые переменные и сброс */
+:root {
+    --bg-color: #050505;
+    --bg-gradient: linear-gradient(180deg, #050505 0%, #0a0a0a 100%); /* Мягкий переход */
+    --text-sand: #E6D5B8;
+    --text-sand-dark: #C1A87D;
+    --btn-blue-glow: rgba(0, 136, 204, 0.4);
+    --font-main: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Плавный скролл по якорям */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-sand);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+}
+
+main {
+    background: var(--bg-gradient);
+    position: relative;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 8%;
+}
+
+/* ================= HEADER & NAV ================= */
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 25px; /* Увеличили отступ от края экрана */
+    z-index: 9999;
+    pointer-events: none;
+}
+
+/* Класс, который добавляется при скролле (JS) */
+#header.scrolled {
+    padding-top: 10px;
+}
+
+.nav-container {
+    pointer-events: auto;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    padding: 10px 25px;
+    background: rgba(10, 10, 10, 0.6); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(239, 235, 235, 0.663);
+    border-radius: 100px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+/* Эффект стекла при скролле */
+#header.scrolled .nav-container {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Десктопная сетка ссылок */
+.nav-links {
+    display: flex;
+    gap: 10px; /* Расстояние между кнопками */
+}
+
+.nav-link {
+    display: block;
+    color: var(--text-sand);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 15px;
+    border-radius: 50px;
+    white-space: nowrap;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    opacity: 1; /* Гарантируем видимость */
+}
+
+/* Apple Liquid Glass Hover Effect */
+.nav-link:hover {
+    background: rgba(230, 213, 184, 0.1); /* Легкий песочный фон */
+    transform: scale(1.05);
+    color: #fff;
+}
+
+/* Скрываем бургер на ПК */
+.burger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10000; /* Поверх всего */
+}
+
+.burger span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: var(--text-sand, #e6d5b8); /* Цвет полосок */
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* --- АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ (до 768px) --- */
+@media screen and (max-width: 768px) {
+    /* Смещаем нашу "пилюлю" в правый верхний угол */
+    #header {
+        justify-content: flex-end; 
+        padding-right: 20px;
+    }
+
+    /* Уменьшаем пилюлю, чтобы она обтягивала только бургер */
+    .nav-container {
+        padding: 10px 15px;
+    }
+
+    /* Показываем бургер */
+    .burger {
+        display: block;
+    }
+
+    /* Выезжающая боковая панель со ссылками */
+    .nav-links {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 40vh;
+        width: 500px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        background: rgba(10, 10, 10, 0.95); /* Темный фон меню */
+        border-radius: 50px;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(239, 235, 235, 0.2);
+        transform: translateX(100%); /* Прячем меню за правый край */
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    .nav-link {
+        font-size: 30px;
+    }
+
+    /* Класс для выезда меню */
+    .nav-links.nav-active {
+        transform: translateX(0);
+    }
+
+    /* Анимация превращения бургера в крестик */
+    .burger.toggle .line1 { transform: rotate(-45deg) translate(-5px, 5px); }
+    .burger.toggle .line2 { opacity: 0; }
+    .burger.toggle .line3 { transform: rotate(45deg) translate(-5px, -5px); }
+}
+/* ================= HERO SECTION ================= */
+
+.hero-section{
+    background: linear-gradient(315deg, #2b2302 0%, #080808 100%);
+
+}
+.hero-container {
+    padding-top: 10%;
+    padding-bottom: 5%;
+    border-bottom: 1px solid rgba(193, 188, 180, 0.117); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.hero-left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-logo {
+    width: 200%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 0 15px rgba(230, 213, 184, 0.1));
+}
+
+.hero-right {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem); /* Адаптивный крупный размер */
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    /* Градиент для текста */
+    background: linear-gradient(90deg, var(--text-sand), var(--text-sand-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-description {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--text-sand);
+    opacity: 0.8; /* "Воздух" и легкость чтения */
+    margin-bottom: 40px;
+    max-width: 600px;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 900px) {
+    
+    .hero-right {
+        align-items: center;
+    }
+    
+    .nav-link {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+    .hero-description {
+    font-size: 18px;
+    text-align: center;
+    }
+    .hero-title {
+        text-align: center;
+    }
+    .hero-container {
+    border-bottom: 1px solid rgba(193, 188, 180, 0.117); 
+    display: flex;
+    flex-direction: column;
+    padding: 10% 0;
+    }
+}
+
+/* Секция Портфолио */
+.portfolio-section {
+    padding: 50px 8%;
+    background: linear-gradient(180deg, #050505 0%, #0f0f0f 50%, #050505 100%);
+    min-height: vh;
+}
+
+.section-title {
+    font-size: 3rem;
+    color: var(--text-sand);
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+/* Сетка */
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    justify-items: center;
+}
+
+/* Карточка работы */
+.work-item {
+    position: relative;
+    z-index: 1;
+    /* Убедитесь, что здесь НЕТ overflow: hidden, иначе свечение обрежется */
+    transition: transform 0.5s ease;
+}
+
+.work-item::before {
+    content: '';
+    position: absolute;
+    top: 15%; /* Сдвигаем чуть выше центра видео */
+    left: 10%;
+    right: 10%;
+    bottom: 25%;
+    
+    /* Используем сплошной яркий цвет, который потом размоем */
+    background: var(--text-sand-dark); 
+    
+    /* Сильнейшее размытие превратит прямоугольник в мягкое облако */
+    filter: blur(80px); 
+    
+    /* В обычном состоянии почти невидимо */
+    opacity: 0.1; 
+    transition: opacity 0.5s ease, filter 0.5s ease;
+    z-index: 0; 
+    pointer-events: none;
+}
+
+/* Состояние при наведении */
+.work-item:hover::before {
+    opacity: 0.6; /* Теперь свет точно будет видно */
+    filter: blur(100px);
+}
+
+.video-container {
+    position: relative;
+    z-index: 2; /* Поднимаем над свечением */
+    background: #000;
+    border-radius: 16px;
+    overflow: hidden;
+    /* Добавляем внешнюю тень для глубины при наведении */
+    transition: box-shadow 0.5s ease;
+}
+
+.v-9-16 .video-container { aspect-ratio: 9 / 16;}
+.h-16-9 .video-container { aspect-ratio: 16 / 10; } /* Чуть выше для баланса */
+
+.h-16-9 {
+    max-width: 70%;
+    height: 100%;
+}
+
+.video-placeholder {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+}
+
+.h-16-9 .work-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.h-16-9 .work-details {
+    padding: 0;
+    list-style: none; /* Убираем стандартные маркеры, если они мешают центровке */
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.h-16-9 .work-details li {
+    justify-content: center; /* Центрируем текст внутри элементов списка */
+    text-align: left;
+}
+
+/* Эффект при наведении на ВСЮ карточку */
+.work-item:hover{
+    opacity: 1;
+}
+
+.work-item:hover .video-placeholder {
+    transform: scale(1.05);
+}
+
+.work-item:hover .video-container {
+    /* Дополнительное свечение по самому краю */
+    box-shadow: 0 0 30px rgba(193, 168, 125, 0.3);
+}
+
+/* Описание под видео */
+/* Убираем лишние тени с текста, чтобы они не спорили со свечением */
+.work-info {
+    position: relative;
+    z-index: 3;
+    margin-top: 20px;
+    background: transparent; /* Описание "лежит" на чистом фоне */
+}
+
+.work-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--text-sand);
+    text-align: center;
+}
+
+.work-details {
+    list-style: none;
+    font-size: 0.9rem;
+    color: var(--text-sand);
+    opacity: 0.7;
+}
+
+.work-details li {
+    margin-bottom: 8px;
+    padding-left: 25px;
+}
+
+/* Минималистичная галочка */
+.work-details li::before {
+    content: "";
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+    background-color: var(--text-sand); /* Цвет берется из вашей переменной */
+    -webkit-mask-image: url('circle-check-regular-full.svg');
+    mask-image: url('circle-check-regular-full.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    vertical-align: middle;
+}
+
+.work-details span {
+    font-weight: 700;
+    color: var(--text-sand-dark);
+}
+
+
+/* АКТИВНОЕ СОСТОЯНИЕ (Модальное расширение) */
+.video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(15px);
+    z-index: 900;
+    display: none; /* Вместо opacity используем display */
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.video-overlay.active {
+    display: block;
+    opacity: 1;
+    pointer-events: all;
+}
+
+.work-item.active {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+}
+.work-item.active.v-9-16 .video-container {
+    height: 85vh; /* Ограничиваем по высоте экрана */
+    aspect-ratio: 9 / 16;
+    width: auto;
+}
+
+/* Если при открытии видео описание мешает, можно скрыть его в мобильной версии активного режима */
+.work-item.active .work-info {
+    background: rgba(10, 10, 10, 0.8);
+    padding: 20px;
+    border-radius: 0 0 16px 16px;
+    width: 100%;
+    text-align: center;
+}
+
+.work-item.active .work-info {
+    position: absolute;
+    top: 0;
+    left: 105%;
+    width: 300px;
+    margin-top: 0;
+}
+
+.work-item.active .video-container {
+    height: 80vh; /* Контейнер подстраивается под высоту экрана */
+    width: auto;
+    aspect-ratio: 9 / 16; /* Для вертикальных */
+}
+
+/* Базовый контейнер видео */
+.video-container {
+    position: relative;
+    width: 100%;
+    background: #000;
+    border-radius: 16px;
+    border: 1px solid rgba(239, 235, 235, 0.663);
+    overflow: hidden;
+    z-index: 2;
+    /* Убираем фиксированные aspect-ratio отсюда, переносим в специфику */
+}
+
+/* Настройки для вертикальных карточек в обычном и активном виде */
+.v-9-16 .video-container {
+    aspect-ratio: 9 / 16;
+}
+
+/* Настройки для горизонтальных карточек в обычном и активном виде */
+.h-16-9 .video-container {
+    aspect-ratio: 16 / 9;
+}
+
+.work-item.active {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+    z-index: 2000;
+    
+    /* Контейнер подстраивается под содержимое */
+    width: auto;
+    height: auto;
+    max-width: 90vw; 
+    max-height: 90vh;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Настройка контейнера видео внутри активной карточки */
+.work-item.active .video-container {
+    /* Ограничиваем видео, чтобы оно занимало примерно половину экрана по высоте */
+    max-height: 80vh; 
+    width: auto;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+/* Пропорции для ВЕРТИКАЛЬНЫХ в активном режиме */
+.work-item.active.v-9-16 .video-container {
+    aspect-ratio: 9 / 16;
+    height: 80vh; 
+}
+
+/* Пропорции для ГОРИЗОНТАЛЬНЫХ в активном режиме */
+.work-item.active.h-16-9 .video-container {
+    aspect-ratio: 16 / 9;
+    /* Ширина будет такой, чтобы высота не превысила 50-60% экрана */
+    height: 50vh; 
+}
+
+/* Центрируем и стилизуем описание под видео */
+.work-item.active .work-info {
+    width: 100%;
+    max-width: 500px; /* Чтобы текст не растягивался слишком широко */
+    text-align: center;
+    margin-top: 20px;
+    background: rgba(10, 10, 10, 0.5);
+    padding: 15px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+/* Скрываем описание в активном режиме */
+.work-item.active .work-info {
+    display: none !important;
+}
+
+/* Мобильная адаптация сетки */
+@media (max-width: 900px) {
+    .work-grid {
+        grid-template-columns: 1fr;
+    }
+    .h-16-9 { grid-column: auto; }
+    .work-item.active { width: 90%; flex-direction: column; }
+    .work-item.active .work-info { position: static; width: 100%; margin-top: 20px; }
+
+    .h-16-9 {
+    max-width: 100%;
+    }
+    .v-9-16 .video-container{
+        max-width: 100%;
+    }
+}
+@media (max-width: 500px) {
+    .h-16-9 {
+        max-width: 100%;
+    }
+    .portfolio-section {
+    padding: 20px 8%;
+    }
+    .section-title {
+        margin-bottom: 30px;
+    }
+    .portfolio-section{
+        padding: 0;
+    }
+    .work-item.active.h-16-9 .video-container {
+    height: 40vh;
+    width: 95%; 
+    }
+    .h-16-9 .video-container {
+    height: 20vh;
+}
+}
+
+/* Переопределяем поведение горизонтального блока */
+.h-16-9 {
+    grid-column: span 3; /* Занимает 3 колонки */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Контейнер для отдельно стоящей кнопки */
+.grid-cta-container {
+    display: flex;
+    align-items: center; /* Центрирование по вертикали относительно видео */
+    justify-content: center; 
+    padding-bottom: 40px; /* Смещение, чтобы кнопка была на уровне видео/текста */
+    padding-top: 30px;
+
+}
+
+/* Адаптивность: на мобильных устройствах всё в одну колонку */
+@media (max-width: 900px) {
+    .h-16-9 {
+        grid-column: span 1;
+    }
+    
+    .grid-cta-container {
+        justify-content: center; /* На мобилках по центру */
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+
+}
+
+
+/* --- Секция Обо мне --- */
+.about-section {
+    padding: 50px 0;
+    /* Графитовый градиент для отделения от черного блока видео */
+    background: linear-gradient(315deg, #2b2302 0%, #080808 100%);
+    border-top: 1px solid rgba(230, 213, 184, 0.05);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.about-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 50px;
+    align-items: center;
+    width: 100%;
+}
+
+/* --- Стилизация Фото --- */
+.photo-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+
+.about-photo {
+    width: 100%;
+    min-height: 50vh;
+    border-radius: 24px;
+    position: relative;
+    z-index: 2;
+    filter: grayscale(20%); /* Легкий стильный эффект */
+    border: 1px solid rgba(230, 213, 184, 0.1);
+}
+
+.photo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    /* background: radial-gradient(circle, rgba(230, 213, 184, 0.15) 0%, transparent 70%); */
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* --- Текстовый контент --- */
+.about-title {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.about-description {
+    font-size: 1.3rem;
+    line-height: 1.7;
+    color: rgba(230, 213, 184, 0.8);
+    margin-bottom: 50px;
+    max-width: 600px;
+}
+
+@media (max-width: 500px) {
+    .about-description {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        color: rgba(230, 213, 184, 0.8);
+        margin-bottom: 20px;
+    }
+    .about-section {
+    padding: 30px 0;
+}
+}
+
+/* --- Сетка контактов (по референсу) --- */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 колонки */
+    gap: 30px;
+}
+
+.contact-card,.contact-card_tg {
+    background: rgba(127, 120, 120, 0.03); /* Очень темный серый */
+    border: 1px solid rgba(239, 235, 235, 0.663);
+    border-radius: 50px;
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.contact-card:hover{
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(230, 213, 184, 0.2);
+    transform: translateY(-5px);
+}
+
+.contact-card_tg:hover{
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(230, 213, 184, 0.2);
+    transform: translateY(-5px);
+}
+
+.contact-card_tg{
+    padding: 15px 20px;
+    width: 300px;
+    min-width: 100px;
+}
+
+.card-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.4); /* Тусклый заголовок */
+}
+
+.card-value {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-sand); /* Песочный цвет из референса */
+    text-decoration: none;
+    transition: color 0.3s ease;
+    word-break: break-all; /* Чтобы длинные email не ломали сетку */
+    text-align: center;
+}
+
+.card-value:hover {
+    color: #fff;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 1000px) {
+    .about-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 50px;
+    }
+    .about-title { text-align: center !important; }
+    .about-description { margin: 0 auto 40px; }
+    .photo-wrapper { margin: 0 auto; }
+}
+
+@media (max-width: 600px) {
+    .contact-grid { grid-template-columns: 1fr; }
+}
+
+/* --- ФУТЕР --- */
+.footer-section {
+    padding: 10px 8%;
+    background: #000000; /* Черный цвет для контраста с блоком "Обо мне" */
+    border-top: 1px solid rgba(230, 213, 184, 0.05);
+    position: relative;
+    z-index: 10;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Две равные колонки */
+    gap: 50px;
+    align-items: center;
+    margin-bottom: 20px; /* Отступ до копирайта */
+}
+
+/* --- Левая часть (Контакты) --- */
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем заголовок и кнопки внутри левой колонки */
+}
+
+.footer-title {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Вертикальный отступ между кнопками */
+    max-width: 100%;
+    min-width: 400px; /* Ограничиваем ширину кнопок */
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Отступ между иконкой и текстом */
+    padding: 16px 15px;
+    background: rgba(232, 226, 226, 0.03);
+    border: 1px solid rgba(239, 235, 235, 0.663);
+    border-radius: 20px;
+    color: var(--text-sand);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+/* Эффект при наведении на контакт: легкий сдвиг вправо и подсветка */
+.footer-link:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(230, 213, 184, 0.3);
+    transform: translateX(8px);
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Контейнер для SVG-иконки */
+.icon-placeholder, .footer-link svg {
+    width: 40x;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: currentColor; /* SVG будет перекрашиваться в цвет текста */
+}
+
+
+/* --- Правая часть (Логотип) --- */
+.footer-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Убедимся, что лого в футере не слишком огромное */
+.footer-logo-img {
+    max-width: 200%;
+    padding-top: 20%;
+}
+
+/* --- Копирайт --- */
+.footer-bottom {
+    text-align: center; 
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-sand);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding-bottom: 30px;
+
+}
+
+/* --- Адаптивность для мобильных телефонов --- */
+@media (max-width: 900px) {
+    .footer-container {
+        grid-template-columns: 1fr; /* Одна колонка вместо двух */
+        gap: 30px;
+        padding-top: 20px;
+
+    }
+    .footer-bottom {
+        text-align: center; /* На телефоне копирайт по центру */
+        padding-bottom: 20px;
+    }
+    .footer-logo-img {
+    padding-top: 0;
+}
+}
+
+@media (max-width: 900px){
+   .footer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px; /* Отступ до копирайта */
+}
+}
+
+@media (max-width: 500px){
+    .footer-link {
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    .footer-links {
+    min-width: 280px; /* Ограничиваем ширину кнопок */
+    }
+}
