@@ -14,15 +14,16 @@
     box-sizing: border-box;
 }
 
-html {
+html, body {
+    max-width: 100%;
+    overflow-x: hidden; /* Запрещает скролл вправо */
+    position: relative;
+    margin: 0;
+    padding: 0;
     scroll-behavior: smooth; /* Плавный скролл по якорям */
-}
-
-body {
     background-color: var(--bg-color);
     color: var(--text-sand);
     font-family: var(--font-main);
-    overflow-x: hidden;
 }
 
 main {
@@ -145,7 +146,7 @@ main {
         position: fixed;
         right: 0;
         top: 0;
-        height: 40vh;
+        height: 50vh;
         width: 500px;
         flex-direction: column;
         justify-content: center;
@@ -161,8 +162,9 @@ main {
     }
 
     .nav-link {
-        font-size: 30px;
+        font-size: 25px;
     }
+
 
     /* Класс для выезда меню */
     .nav-links.nav-active {
@@ -174,6 +176,16 @@ main {
     .burger.toggle .line2 { opacity: 0; }
     .burger.toggle .line3 { transform: rotate(45deg) translate(-5px, -5px); }
 }
+
+@media screen and (max-width: 480px) {
+    .nav-links {
+        width: 360px;
+    }
+
+}
+
+
+
 /* ================= HERO SECTION ================= */
 
 .hero-section{
@@ -238,10 +250,6 @@ main {
         align-items: center;
     }
     
-    .nav-link {
-        font-size: 14px;
-        padding: 6px 10px;
-    }
     .hero-description {
     font-size: 18px;
     text-align: center;
@@ -457,7 +465,7 @@ main {
     padding: 0;
 }
 .work-item.active.v-9-16 .video-container {
-    height: 85vh; /* Ограничиваем по высоте экрана */
+    height: 70vh; /* Ограничиваем по высоте экрана */
     aspect-ratio: 9 / 16;
     width: auto;
 }
@@ -569,7 +577,7 @@ main {
         grid-template-columns: 1fr;
     }
     .h-16-9 { grid-column: auto; }
-    .work-item.active { width: 90%; flex-direction: column; }
+    .work-item.active { width: 90%; height: 70vh; flex-direction: column; }
     .work-item.active .work-info { position: static; width: 100%; margin-top: 20px; }
 
     .h-16-9 {
@@ -580,25 +588,20 @@ main {
     }
 }
 @media (max-width: 500px) {
-    .h-16-9 {
-        max-width: 100%;
-    }
     .portfolio-section {
     padding: 20px 8%;
     }
     .section-title {
         margin-bottom: 30px;
+        margin-top: 20px;
     }
     .portfolio-section{
         padding: 0;
     }
     .work-item.active.h-16-9 .video-container {
-    height: 40vh;
-    width: 95%; 
+    height: 50vh;
+    width: 100%; 
     }
-    .h-16-9 .video-container {
-    height: 20vh;
-}
 }
 
 /* Переопределяем поведение горизонтального блока */
@@ -638,6 +641,7 @@ main {
     pointer-events: none; /* Чтобы нельзя было случайно нажать */
     transition: all 0.4s ease; /* Плавное исчезновение */
 }
+
 /* --- Секция Обо мне --- */
 .about-section {
     padding: 50px 0;
