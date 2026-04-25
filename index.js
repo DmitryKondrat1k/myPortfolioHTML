@@ -135,20 +135,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-
-
-
-    // overlay.addEventListener('click', () => {
-    //     const activeItem = document.querySelector('.work-item.active');
-    //     if (activeItem) {
-    //         activeItem.classList.remove('active');
-    //         overlay.classList.remove('active');
-    //         document.body.style.overflow = '';
-
-    //         // 3. ВОЗВРАЩАЕМ ВЕРХНЮЮ ПЛАШКУ
-    //         header.classList.remove('header-hidden');
-
-    //         const videoId = activeItem.getAttribute('data-video');
-    //         activeItem.querySelector('.video-container').innerHTML = `<div class="video-placeholder" style="background-image: url('https://img.youtube.com/vi/${videoId}/maxresdefault.jpg');"></div>`;
-    //     }
-    // });
