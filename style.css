@@ -179,7 +179,7 @@ main {
 
 @media screen and (max-width: 480px) {
     .nav-links {
-        width: 360px;
+        width: 340px;
     }
 
 }
@@ -209,7 +209,7 @@ main {
 }
 
 .hero-logo {
-    width: 200%;
+    width: 150%;
     height: auto;
     display: block;
     filter: drop-shadow(0 0 15px rgba(230, 213, 184, 0.1));
@@ -223,7 +223,7 @@ main {
 }
 
 .hero-title {
-    font-size: clamp(2.5rem, 5vw, 4.5rem); /* Адаптивный крупный размер */
+    font-size: clamp(2.5rem, 4vw, 4.0rem); /* Адаптивный крупный размер */
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 24px;
@@ -239,7 +239,7 @@ main {
     line-height: 1.5;
     color: var(--text-sand);
     opacity: 0.8; /* "Воздух" и легкость чтения */
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     max-width: 600px;
 }
 
@@ -262,6 +262,27 @@ main {
     display: flex;
     flex-direction: column;
     padding: 10% 0;
+    }
+}
+
+@media (max-width: 768px){
+
+}
+
+@media (max-width: 500px){
+    .hero-logo {
+    width: 120%;
+    }
+    .hero-container {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    }
+    .hero-title {
+    font-size: clamp(2.0rem, 5vw, 4.5rem);
+    margin-bottom: 20px;
+    }
+    .hero-description{
+        margin-bottom: 20px;
     }
 }
 
@@ -662,6 +683,11 @@ main {
     width: 100%;
 }
 
+@media (max-width:500px){
+    .about-container {
+    gap: 20px;
+    }
+}
 /* --- Стилизация Фото --- */
 .photo-wrapper {
     position: relative;
@@ -724,7 +750,7 @@ main {
     gap: 30px;
 }
 
-.contact-card,.contact-card_tg {
+.contact-card_tg {
     background: rgba(127, 120, 120, 0.03); /* Очень темный серый */
     border: 1px solid rgba(239, 235, 235, 0.663);
     border-radius: 50px;
@@ -736,7 +762,7 @@ main {
     transition: all 0.3s ease;
 }
 
-.contact-card:hover{
+.contact-card_tg:hover{
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(230, 213, 184, 0.2);
     transform: translateY(-5px);
@@ -789,11 +815,17 @@ main {
 
 @media (max-width: 600px) {
     .contact-grid { grid-template-columns: 1fr; }
-}
+    .about-description { margin: 0 auto 20px; }
 
+}
+@media (max-width:500px){
+    .about-container {
+    gap: 20px;
+    }
+}
 /* --- ФУТЕР --- */
 .footer-section {
-    padding: 10px 8%;
+    padding: 20px 8%;
     background: #000000; /* Черный цвет для контраста с блоком "Обо мне" */
     border-top: 1px solid rgba(230, 213, 184, 0.05);
     position: relative;
@@ -803,9 +835,9 @@ main {
 .footer-container {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Две равные колонки */
-    gap: 50px;
+    gap: 70px;
     align-items: center;
-    margin-bottom: 20px; /* Отступ до копирайта */
+    margin-bottom: 50px; /* Отступ до копирайта */
 }
 
 /* --- Левая часть (Контакты) --- */
@@ -872,7 +904,7 @@ main {
 
 /* Убедимся, что лого в футере не слишком огромное */
 .footer-logo-img {
-    max-width: 200%;
+    max-width: 150%;
     padding-top: 20%;
 }
 
