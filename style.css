@@ -99,11 +99,7 @@ main {
 }
 
 /* Apple Liquid Glass Hover Effect */
-.nav-link:hover {
-    background: rgba(230, 213, 184, 0.1); /* Легкий песочный фон */
-    transform: scale(1.05);
-    color: #fff;
-}
+
 
 /* Скрываем бургер на ПК */
 .burger {
@@ -323,10 +319,7 @@ main {
     left: 10%;
     right: 10%;
     bottom: 25%;
-    
-    /* Используем сплошной яркий цвет, который потом размоем */
-    background: var(--text-sand-dark); 
-    
+      
     /* Сильнейшее размытие превратит прямоугольник в мягкое облако */
     filter: blur(80px); 
     
@@ -335,12 +328,6 @@ main {
     transition: opacity 0.5s ease, filter 0.5s ease;
     z-index: 0; 
     pointer-events: none;
-}
-
-/* Состояние при наведении */
-.work-item:hover::before {
-    opacity: 0.6; /* Теперь свет точно будет видно */
-    filter: blur(100px);
 }
 
 .video-container {
@@ -389,17 +376,23 @@ main {
 }
 
 /* Эффект при наведении на ВСЮ карточку */
-.work-item:hover{
-    opacity: 1;
-}
+@media (hover: hover) {
+    .work-item:hover {
+        opacity: 1;
+    }
 
-.work-item:hover .video-placeholder {
-    transform: scale(1.05);
-}
+    .work-item:hover::before {
+        opacity: 0.6; 
+        filter: blur(100px);
+    }
 
-.work-item:hover .video-container {
-    /* Дополнительное свечение по самому краю */
-    box-shadow: 0 0 30px rgba(193, 168, 125, 0.3);
+    .work-item:hover .video-placeholder {
+        transform: scale(1.05);
+    }
+
+    .work-item:hover .video-container {
+        box-shadow: 0 0 30px rgba(193, 168, 125, 0.3);
+    }
 }
 
 /* Описание под видео */
@@ -447,7 +440,6 @@ main {
 
 .work-details span {
     font-weight: 700;
-    color: var(--text-sand-dark);
 }
 
 
@@ -760,18 +752,7 @@ main {
     align-items: center;
     gap: 8px;
     transition: all 0.3s ease;
-}
-
-.contact-card_tg:hover{
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(230, 213, 184, 0.2);
-    transform: translateY(-5px);
-}
-
-.contact-card_tg:hover{
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(230, 213, 184, 0.2);
-    transform: translateY(-5px);
+    text-decoration: none;
 }
 
 .contact-card_tg{
@@ -795,10 +776,6 @@ main {
     transition: color 0.3s ease;
     word-break: break-all; /* Чтобы длинные email не ломали сетку */
     text-align: center;
-}
-
-.card-value:hover {
-    color: #fff;
 }
 
 /* Адаптивность для мобильных */
@@ -875,15 +852,6 @@ main {
     transition: all 0.3s ease;
 }
 
-/* Эффект при наведении на контакт: легкий сдвиг вправо и подсветка */
-.footer-link:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(230, 213, 184, 0.3);
-    transform: translateX(8px);
-    color: #fff;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-}
-
 /* Контейнер для SVG-иконки */
 .icon-placeholder, .footer-link svg {
     width: 40x;
@@ -956,5 +924,36 @@ main {
     }
     .footer-links {
     min-width: 280px; /* Ограничиваем ширину кнопок */
+    }
+}
+
+/* ================= АНИМАЦИИ НАВЕДЕНИЯ (ТОЛЬКО ДЛЯ ПК) ================= */
+@media (hover: hover) {
+    /* Навигация */
+    .nav-link:hover {
+        background: rgba(230, 213, 184, 0.1);
+        transform: scale(1.05);
+        color: #fff;
+    }
+
+    /* Кнопки Telegram */
+    .contact-card_tg:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(230, 213, 184, 0.2);
+        transform: translateY(-5px);
+    }
+
+    /* Текст внутри карточек */
+    .card-value:hover {
+        color: #fff;
+    }
+
+    /* Ссылки в подвале */
+    .footer-link:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(230, 213, 184, 0.3);
+        transform: translateX(8px);
+        color: #fff;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     }
 }

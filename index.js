@@ -104,14 +104,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttons = document.querySelectorAll(".contact-card_tg");
     gsap.set(buttons, { scale: 1, y: 0, force3D: true });
 
-    buttons.forEach((btn) => {
-        btn.addEventListener("mouseenter", () => {
-            gsap.to(btn, { scale: 0.97, y: -1.5, duration: 0.3, overwrite: "auto", ease: "power2.out" });
+    // Проверяем, поддерживает ли устройство наведение курсором (мышь/тачпад)
+    if (window.matchMedia("(hover: hover)").matches) {
+        buttons.forEach((btn) => {
+            btn.addEventListener("mouseenter", () => {
+                gsap.to(btn, { scale: 0.97, y: -1.5, duration: 0.3, overwrite: "auto", ease: "power2.out" });
+            });
+            btn.addEventListener("mouseleave", () => {
+                gsap.to(btn, { scale: 1, y: -4, duration: 0.3, ease: "back.out(2)", overwrite: "auto", onComplete: () => { gsap.to(btn, { y: 0, duration: 0.2 }); } });
+            });
         });
-        btn.addEventListener("mouseleave", () => {
-            gsap.to(btn, { scale: 1, y: -4, duration: 0.3, ease: "back.out(2)", overwrite: "auto", onComplete: () => { gsap.to(btn, { y: 0, duration: 0.2 }); } });
-        });
-    });
+    }
 
     // --- 5. БУРГЕР МЕНЮ ---
     const burger = document.getElementById('burger');
