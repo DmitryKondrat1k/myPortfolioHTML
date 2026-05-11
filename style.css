@@ -957,3 +957,17 @@ main {
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     }
 }
+
+/* Включаем аппаратное ускорение для анимируемых элементов */
+.work-item, .info-card, .contact-card_tg, .hero-logo {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0); /* "Обманываем" браузер, заставляя его думать, что это 3D */
+}
+
+/* На мобилках отключаем или упрощаем тяжелый блюр */
+@media (max-width: 900px) {
+    .work-item::before {
+        filter: blur(30px) !important; /* Уменьшаем нагрузку с 100px до 30px */
+    }
+}
